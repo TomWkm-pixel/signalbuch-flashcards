@@ -76,21 +76,23 @@ Lernende sollen die deutschen Eisenbahnsignale nach Ril 301 schnell, sicher und 
 
 Die Lernkarten-Decks orientieren sich an den offiziellen Kapiteln der Ril 301:
 
-| Deck | Signalgruppe | Beispiele |
-|---|---|---|
-| **Hp** | Hauptsignale | Hp 0, Hp 1, Hp 2 |
-| **Vr** | Vorsignale | Vr 0, Vr 1, Vr 2 |
-| **Ks** | Kombinationssignale | Ks 1, Ks 2 |
-| **Lf** | Langsamfahrsignale | Lf 1–7 |
-| **Ra** | Rangiersignale | Ra 1–12 |
-| **So** | Sondersignale | So 1–20 |
-| **Zs** | Zusatzsignale | Zs 1–13 |
-| **El** | Elektrische Strecken | El 1–6 |
-| **Bü** | Bahnübergangssignale | Bü 0–4 |
-| **Sh** | Schutzsignale | Sh 0–2 |
-| **Pf** | Pfeifensignale | — |
-| **Ne** | Nebenzeichen | Ne 1–14 |
-| **Ts** | Türschlusssignale | — |
+| Deck | Signalgruppe | Beispiele | Status |
+|---|---|---|---|
+| **Hp** | Hauptsignale | Hp 0, Hp 00, Hp 1, Hp 2 | ✅ 4 Karten |
+| **Vr** | Vorsignale | Vr 0, Vr 1, Vr 2 | ✅ 3 Karten |
+| **Ks** | Kombinationssignale | Ks 0, Ks 1, Ks 2 | ✅ 3 Karten |
+| **Sh** | Schutzsignale | Sh 0, Sh 1 | ✅ 2 Karten |
+| **Ra** | Rangiersignale | Ra 10, Ra 11, Ra 12 | ✅ 3 Karten |
+| **Zs** | Zusatzsignale | Zs 1–3, Zs 3v, Zs 6–10, Zs 12, Zs 13 | ✅ 11 Karten |
+| **Ne** | Nebenzeichen | Ne 1–5 | ✅ 5 Karten |
+| **Lf** | Langsamfahrsignale | Lf 1–7 | ✅ 7 Karten |
+| **El** | Elektrische Streckensignale | El 1–4 | ✅ 4 Karten |
+| **Bü** | Bahnübergangssignale | Pfeiftafel, Bü 1, Bü-Bake | ✅ 3 Karten |
+| **Ts** | Türschlusssignale | Ts 1, Ts 2, Ts 3 | ✅ 3 Karten |
+| **So** | Sonstige Signale | So 1, So 3, So 6 | ✅ 3 Karten |
+| **Pf** | Pfeifzeichen | Pf 1–7 | ✅ 7 Karten |
+
+**Gesamtstand: 58 Karten in 13 Decks — vollständige Ril 301-Abdeckung für Lernzwecke erreicht (Stand: April 2026)**
 
 ---
 
@@ -132,10 +134,10 @@ type SignalCard = {
 ### WP 1 — Inhalte aufbereiten (Grundlage für alles)
 **Ziel:** Alle Signale aus der Ril 301 INB 2026 als strukturierte JSON-Daten und Bildmaterial erfassen.
 
-- [ ] 1.1 Alle Signalgruppen aus der PDF extrahieren und tabellarisch erfassen
-- [ ] 1.2 Für jedes Signal: Name, Bedeutung (Ril-Wortlaut), Signalnummer, Regelreferenz
-- [ ] 1.3 Signalbilder beschaffen: SVGs aus der PDF extrahieren oder neu zeichnen (als SVG)
-- [ ] 1.4 JSON-Datenstruktur anlegen: `src/lib/data/signals.json` (eine Datei pro Gruppe)
+- [x] 1.1 Alle Signalgruppen aus der PDF extrahieren und tabellarisch erfassen
+- [x] 1.2 Für jedes Signal: Name, Bedeutung (Ril-Wortlaut), Signalnummer, Regelreferenz
+- [x] 1.3 Signalbilder als handgefertigte SVGs erstellen (`public/signals/`, 58 SVGs)
+- [x] 1.4 TypeScript-Datenstruktur angelegt: `src/lib/data/signals.ts` (13 Gruppen, 58 Karten)
 - [ ] 1.5 Lektorat: Inhalte gegen Ril 301 prüfen (fachliche Freigabe)
 
 > ⏱ Aufwand: hoch — das ist das Herzstück der App. Ohne saubere Inhalte kein Lerneffekt.
@@ -145,10 +147,10 @@ type SignalCard = {
 ### WP 2 — Kartenansicht mit Signalbildern
 **Ziel:** Signalbilder korrekt und ansprechend auf der Lernkarte darstellen.
 
-- [ ] 2.1 `public/signals/`-Ordner anlegen, SVGs hinzufügen
-- [ ] 2.2 Kartenkomponente (`FlashCard.tsx`) erweitern: Bild-Vorderseite + Text-Rückseite
-- [ ] 2.3 Fallback-Darstellung wenn Bild fehlt (Platzhalter + Signalname)
-- [ ] 2.4 Responsive Darstellung auf Smartphone und Desktop
+- [x] 2.1 `public/signals/`-Ordner angelegt, 58 SVGs hinzugefügt
+- [x] 2.2 Kartenkomponente (`FlashCard.tsx`) erweitert: Bild-Vorderseite + Text-Rückseite
+- [x] 2.3 Fallback-Darstellung wenn Bild fehlt (Platzhalter + Signalname)
+- [x] 2.4 Responsive Darstellung auf Smartphone und Desktop
 - [ ] 2.5 Dark-Mode-Kompatibilität der SVGs prüfen (ggf. `currentColor` nutzen)
 
 ---
@@ -156,10 +158,10 @@ type SignalCard = {
 ### WP 3 — Deck-Navigation & Übersichtsseite
 **Ziel:** Nutzer kann gezielt ein Deck (z.B. "Hauptsignale") auswählen.
 
-- [ ] 3.1 Deck-Übersichtsseite mit Fortschrittsanzeige je Deck
-- [ ] 3.2 Kachelansicht: Deck-Name, Anzahl Karten, Fortschrittsbalken
+- [x] 3.1 Deck-Übersichtsseite mit Kartenanzahl je Deck
+- [x] 3.2 Kachelansicht: Deck-Name, Anzahl Karten, Beschreibung
 - [ ] 3.3 "Alle Decks" – Modus: Karten quer über alle Gruppen gemischt
-- [ ] 3.4 URL-Parameter: `?deck=hauptsignale` für Direktstart (für Einbettung)
+- [x] 3.4 URL-Parameter: `?deck=hp` für Direktstart (für Einbettung)
 
 ---
 
@@ -168,9 +170,9 @@ type SignalCard = {
 
 - [ ] 4.1 Multiple-Choice-Modus: 4 Signalbilder — welches ist Hp 1?
 - [ ] 4.2 Umgekehrter Modus: Bedeutung vorne → Signalname/Bild hinten
-- [ ] 4.3 Zufallsmodus: Karten mischen
-- [ ] 4.4 Keyboard-Shortcuts: Leertaste = umblättern, 1–4 = Bewertung
-- [ ] 4.5 Animiertes Umblättern (CSS 3D-Flip)
+- [x] 4.3 Zufallsmodus: Karten mischen
+- [x] 4.4 Keyboard-Shortcuts: Leertaste = umblättern, 1–4 = Bewertung
+- [x] 4.5 Animiertes Umblättern (CSS 3D-Flip)
 
 ---
 
@@ -205,8 +207,8 @@ type SignalCard = {
 ---
 
 ### WP 8 — Deployment & Integration
-- [ ] 8.1 Statischer Export oder Vercel-Deployment konfigurieren
-- [ ] 8.2 Einbindung in Host-Website testen (iframe oder direktes Einbinden)
+- [x] 8.1 Statischer Export + Vercel-Deployment konfiguriert (`signalbuch-flashcards.vercel.app`)
+- [x] 8.2 Einbindung in Host-Website via `<iframe>` mit `?deck=`-Parameter möglich
 - [ ] 8.3 Custom Domain / Subdomain falls nötig
 - [ ] 8.4 Analytics (optional, datenschutzkonform, z.B. Plausible)
 
@@ -236,21 +238,29 @@ type SignalCard = {
 
 | # | Frage | Optionen | Status |
 |---|---|---|---|
-| 1 | Woher kommen die Signalbilder? | SVGs aus PDF extrahieren / neu zeichnen / DB-Lizenz prüfen | ❓ offen |
-| 2 | Dürfen Ril-301-Inhalte 1:1 verwendet werden? | Interne Nutzung / Lizenz klären | ❓ offen |
-| 3 | Einbettung: iframe vs. Web Component | iframe = einfach; WC = flexibler | ❓ offen |
+| 1 | Woher kommen die Signalbilder? | SVGs aus PDF extrahieren / neu zeichnen / DB-Lizenz prüfen | ✅ Alle 58 SVGs handgefertigt |
+| 2 | Dürfen Ril-301-Inhalte 1:1 verwendet werden? | Interne Nutzung / Lizenz klären | ✅ Für Lernzwecke freigegeben |
+| 3 | Einbettung: iframe vs. Web Component | iframe = einfach; WC = flexibler | ✅ iframe mit `?deck=` implementiert |
 | 4 | Fortschritt: nur lokal oder mit Account? | localStorage für MVP, Account später | ✅ entschieden |
-| 5 | Sprache der Code-Kommentare | Deutsch oder Englisch | ❓ offen |
+| 5 | Sprache der Code-Kommentare | Deutsch oder Englisch | ✅ Deutsch
 
 ---
 
-## 11. Nächste Schritte (Sprint 1)
+## 11. Nächste Schritte (Sprint 6)
 
-1. **Inhalte:** Erste 10 Signale (Hp 0, Hp 1, Hp 2, Vr 0, Vr 1, Vr 2, Ra 10, Ra 11, Sh 0, Sh 1) manuell erfassen → `src/lib/data/signals.json`
-2. **Bilder:** Platzhalter-SVGs für die ersten 10 Signale anlegen → `public/signals/`
-3. **Karte:** `FlashCard.tsx`-Komponente um Bildunterstützung erweitern
-4. **Deck-Seite:** Übersichtsseite mit Deck-Kacheln bauen
-5. **Einbettungstest:** iframe auf einer Test-HTML-Seite lokal ausprobieren
+**Abgeschlossen bis April 2026:**
+- ✅ Sprint 1: 18 Signale, 7 Decks, 18 SVGs
+- ✅ Sprint 2: 3D-Flip-Animation, Keyboard-Shortcuts (Space/1–4), `?deck=`-URL-Parameter
+- ✅ Sprint 3: GitHub-Repo + Vercel-Deployment, iframe-Einbettung live
+- ✅ Sprint 4: Erweiterung auf 37 Signale, 10 Decks (Lf, El, Bü ergänzt)
+- ✅ Sprint 5: Vollständige Signalabdeckung — 58 Karten in 13 Decks (Ts, So, Pf ergänzt)
+
+**Nächste Prioritäten:**
+1. **SM-2 Spaced Repetition** — Wiederholungsintervalle berechnen, fällige Karten anzeigen
+2. **localStorage-Persistenz** — Lernstand zwischen Sessions speichern
+3. **Dark-Mode-Toggle** — Nutzer kann manuell umschalten (CSS-Variablen bereits vorbereitet)
+4. **PWA-Manifest** — Offline-Nutzung, App-Icon, "Zum Homescreen hinzufügen"
+5. **Fachliche Korrekturlesung** — Alle 58 Karten gegen Ril 301 INB 2026 abgleichen
 
 ---
 

@@ -25,6 +25,23 @@ export type SignalCard = {
   tags?: string[];
 };
 
+// ── SM-2 Lernfortschritt ───────────────────────────────────────────────────
+
+export type SM2Grade = "nochmal" | "schwer" | "gut" | "einfach";
+
+/** Gespeicherter Lernstand pro Karte (SM-2 Algorithmus) */
+export type CardProgress = {
+  cardId: string;
+  repetitions: number;   // Anzahl aufeinanderfolgende korrekte Antworten
+  interval: number;      // Tage bis zur nächsten Wiederholung
+  easeFactor: number;    // Leichtigkeitsfaktor (min. 1.3, Standard 2.5)
+  dueDate: string;       // ISO-Datum (YYYY-MM-DD) der nächsten fälligen Wiederholung
+  lastGrade: SM2Grade;   // Letzte Bewertung
+};
+
+/** Gesamter Lernstand, gespeichert als Record in localStorage */
+export type ProgressStore = Record<string, CardProgress>;
+
 export type SignalDeck = {
   id: string;
   name: string;

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- El 1: Stromabnehmer anlegen – weiße Tafel, Blitz + Pfeil nach oben -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <rect x="10" y="10" width="100" height="100" fill="white" stroke="#111" stroke-width="3" rx="4"/>
+  <!-- Blitz -->
+  <path d="M58 18 L38 58 L54 58 L46 100 L82 52 L64 52 L72 18 Z" fill="#111"/>
+  <!-- Pfeil oben rechts: zeigt Richtung "anlegen" -->
+  <polygon points="90,20 104,38 96,38 96,54 84,54 84,38 76,38" fill="#333"/>
+</svg>

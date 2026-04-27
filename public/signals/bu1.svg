@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Bü 1: Bahnübergangstafel – weißes Rechteck mit Andreaskreuz (X) -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <rect x="10" y="14" width="100" height="86" fill="white" stroke="#111" stroke-width="3" rx="3"/>
+  <!-- Andreaskreuz -->
+  <line x1="20" y1="24" x2="100" y2="90" stroke="#111" stroke-width="10" stroke-linecap="round"/>
+  <line x1="100" y1="24" x2="20" y2="90" stroke="#111" stroke-width="10" stroke-linecap="round"/>
+  <rect x="57" y="100" width="6" height="16" fill="#888" rx="1"/>
+</svg>

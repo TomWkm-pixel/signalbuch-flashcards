@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Lf 1: Langsamfahrscheibe – gelbe Scheibe mit schwarzen Schrägstreifen -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <circle cx="60" cy="56" r="44" fill="#f0c000" stroke="#111" stroke-width="3"/>
+  <clipPath id="lf1c"><circle cx="60" cy="56" r="44"/></clipPath>
+  <g clip-path="url(#lf1c)" stroke="#111" stroke-width="14" stroke-linecap="square">
+    <line x1="-20" y1="2"  x2="140" y2="110"/>
+    <line x1="-20" y1="-30" x2="140" y2="78"/>
+    <line x1="-20" y1="34" x2="140" y2="142"/>
+  </g>
+  <circle cx="60" cy="56" r="44" fill="none" stroke="#111" stroke-width="3"/>
+  <rect x="57" y="100" width="6" height="16" fill="#888" rx="1"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Ne 2: Vorsignalbake (1 Streifen) – weiße Tafel mit einem gelben Schrägstreifen -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <rect x="26" y="10" width="68" height="96" fill="white" stroke="#111" stroke-width="3" rx="2"/>
+  <clipPath id="ne2c"><rect x="26" y="10" width="68" height="96" rx="2"/></clipPath>
+  <!-- Ein gelber Schrägstreifen -->
+  <rect x="16" y="48" width="88" height="26" fill="#f0c000" transform="rotate(-10 60 60)" clip-path="url(#ne2c)"/>
+  <rect x="57" y="106" width="6" height="10" fill="#888" rx="1"/>
+</svg>

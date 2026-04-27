@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Lf 2: Ende der Langsamfahrstelle – weiße Scheibe -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <circle cx="60" cy="56" r="44" fill="white" stroke="#111" stroke-width="3"/>
+  <rect x="57" y="100" width="6" height="16" fill="#888" rx="1"/>
+</svg>

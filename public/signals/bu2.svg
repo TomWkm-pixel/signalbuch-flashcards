@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Bü 2: Bahnübergangsbake (1 Bake, 3 schwarze Streifen auf weißer Tafel, schräg) -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <!-- Bake: schräges weißes Rechteck mit schwarzen Streifen -->
+  <rect x="30" y="10" width="60" height="94" fill="white" stroke="#111" stroke-width="3" rx="3"/>
+  <!-- 3 schwarze Schrägstreifen -->
+  <clipPath id="buc"><rect x="30" y="10" width="60" height="94" rx="3"/></clipPath>
+  <g clip-path="url(#buc)" fill="#111">
+    <rect x="20" y="12" width="80" height="18" transform="rotate(-10 60 60)"/>
+    <rect x="20" y="44" width="80" height="18" transform="rotate(-10 60 60)"/>
+    <rect x="20" y="76" width="80" height="18" transform="rotate(-10 60 60)"/>
+  </g>
+  <rect x="57" y="104" width="6" height="12" fill="#888" rx="1"/>
+</svg>

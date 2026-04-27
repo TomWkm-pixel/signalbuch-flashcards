@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Zs 6: Gegengleisanzeiger – weißer waagerechter Balken auf dunklem Hintergrund -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <!-- Zwei weiße waagerechte Balken (typisch Zs 6) -->
+  <rect x="18" y="38" width="84" height="14" fill="white" rx="2"/>
+  <rect x="18" y="62" width="84" height="14" fill="white" rx="2"/>
+</svg>

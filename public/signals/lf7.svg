@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Lf 7: Ende der Geschwindigkeitsbeschränkung – weiße Tafel mit Diagonalstrich -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <rect x="14" y="20" width="92" height="72" fill="white" stroke="#111" stroke-width="3" rx="3"/>
+  <clipPath id="lf7c"><rect x="14" y="20" width="92" height="72" rx="3"/></clipPath>
+  <line x1="14" y1="92" x2="106" y2="20" stroke="#111" stroke-width="8" clip-path="url(#lf7c)"/>
+  <rect x="57" y="92" width="6" height="22" fill="#888" rx="1"/>
+</svg>

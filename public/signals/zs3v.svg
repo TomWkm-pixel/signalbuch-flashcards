@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Zs 3v: Vorsignal-Geschwindigkeitsanzeiger – gelbe Ziffer auf dunklem Hintergrund, rautenförmig -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <!-- Rautenförmiger Rahmen (wie Vorsignal-Schirm) -->
+  <polygon points="60,8 112,60 60,112 8,60" fill="#0d0d0d" stroke="#555" stroke-width="2"/>
+  <!-- Gelbe Ziffer -->
+  <text x="60" y="74" font-family="Arial Black,Arial,sans-serif" font-size="44" font-weight="900" fill="#f0c000" text-anchor="middle">6</text>
+</svg>

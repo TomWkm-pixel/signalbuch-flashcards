@@ -35,14 +35,14 @@ export default function Home() {
 
       <ul className="space-y-4">
         {SIGNAL_DECKS.map((deck) => (
-          <li key={deck.id} className="card flex items-start justify-between gap-4 flex-wrap">
-            <div>
+          <li key={deck.id} className="card flex items-center justify-between gap-4">
+            <div className="min-w-0">
               <div className="font-semibold" style={{ color: "var(--text)" }}>{deck.name}</div>
               <div className="muted text-sm mt-0.5">{deck.description}</div>
               <div className="muted text-xs mt-1">{deck.cards.length} Signalkarte{deck.cards.length !== 1 ? "n" : ""}</div>
             </div>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary flex-shrink-0"
               type="button"
               onClick={() => setStudyDeck(deck)}
               disabled={deck.cards.length === 0}

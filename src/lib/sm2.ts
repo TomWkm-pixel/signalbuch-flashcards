@@ -178,3 +178,52 @@ export function getSessionCards<T extends { id: string }>(
   // Mische fällige Karten zufällig
   return [...due].sort(() => Math.random() - 0.5);
 }
+
+// ── Streak-Tracking ───────────────────────────────────────────────────────────
+
+const STREAK_KEY = "signalbuch_streak";
+
+export type StreakData = {
+  currentStreak: number;  // Aktuelle Streak-Tage
+  lastStudyDate: string;  // ISO-Datum des letzten Lerntags
+  longestStreak: number;  // Rekord
+};
+
+export function loadStreak(): StreakData {
+  if (typeof window === "undefined")
+    return { currentStreak: 0, lastStudyDate: "", longestStreak: 0 };
+  try {
+    const raw = localStorage.getItem(STREAK_KEY);
+    return raw
+      ? (JSON.parse(raw) as StreakData)
+      : { currentStreak: 0, lastStudyDate: "", longestStreak: 0 };
+  } catch {
+    return { currentStreak: 0, lastStudyDate: "", longestStreak: 0 };
+  }
+}
+
+/** Soll nach jeder abgeschlossenen Lernsession aufgerufen werden */
+export function updateStreak(): StreakData {
+  if (typeof window === "undefined")
+    return { currentStreak: 0, lastStudyDate: "", longestStreak: 0 };
+
+  const t = today();
+  const data = loadStreak();
+
+  if (data.lastStudyDate === t) {
+    // Heute schon gelernt — nichts ändern
+    return data;
+  }
+
+  const yesterday = addDays(t, -1);
+  const newStreak =
+    data.lastStudyDate === yesterday ? data.currentStreak + 1 : 1;
+
+  const updated: StreakData = {
+    currentStreak: newStreak,
+    lastStudyDate: t,
+    longestStreak: Math.max(data.longestStreak, newStreak),
+  };
+  localStorage.setItem(STREAK_KEY, JSON.stringify(updated));
+  return updated;
+}

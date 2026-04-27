@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { SignalCard, SignalDeck, SM2Grade } from "@/lib/types";
-import { updateCardProgress, getSessionCards, loadProgress } from "@/lib/sm2";
+import { updateCardProgress, getSessionCards, loadProgress, updateStreak } from "@/lib/sm2";
 import FlashCard from "@/components/FlashCard";
 
 type Props = { deck: SignalDeck; onExit: () => void };
@@ -30,6 +30,7 @@ export default function StudySession({ deck, onExit }: Props) {
       setLastInterval(updated.interval);
       setGrades((prev) => [...prev, g]);
       if (index + 1 >= cards.length) {
+        updateStreak();
         setDone(true);
       } else {
         setIndex(index + 1);

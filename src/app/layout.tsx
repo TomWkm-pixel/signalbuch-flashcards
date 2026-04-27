@@ -28,6 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
       <body className="min-h-screen">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'))}`,
+          }}
+        />
         <header className="border-b" style={{ borderColor: "var(--border)", background: "var(--card-bg)" }}>
           <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
             <span className="font-semibold tracking-tight" style={{ color: "var(--text)" }}>

@@ -4,13 +4,21 @@ import { useState, useEffect } from "react";
 import type { SignalDeck } from "@/lib/types";
 import { SIGNAL_DECKS } from "@/lib/data/signals";
 import StudySession from "@/components/StudySession";
-import { loadProgress, getDeckStats, type DeckStats } from "@/lib/sm2";
+import { loadProgress, getDeckStats, loadStreak, type DeckStats, type StreakData } from "@/lib/sm2";
+
+// Virtuelles "Alle Decks"-Deck — alle Karten gemischt
+const ALL_DECK: SignalDeck = {
+  id: "alle",
+  name: "Alle Signale",
+  description: "Alle 58 Signalkarten aus allen Decks gemischt",
+  cards: SIGNAL_DECKS.flatMap((d) => d.cards),
+};
 
 export default function Home() {
   const [studyDeck, setStudyDeck] = useState<SignalDeck | null>(null);
   const [stats, setStats] = useState<Record<string, DeckStats>>({});
+  const [streak, setStreak] = useState<StreakData>({ currentStreak: 0, lastStudyDate: "", longestStreak: 0 });
 
-  // Lernstand aus localStorage laden (client-only)
   useEffect(() => {
     const store = loadProgress();
     const result: Record<string, DeckStats> = {};
@@ -18,16 +26,16 @@ export default function Home() {
       result[deck.id] = getDeckStats(deck.cards.map((c) => c.id), store);
     }
     setStats(result);
-  }, [studyDeck]); // Neu laden nach jeder Session
+    setStreak(loadStreak());
+  }, [studyDeck]);
 
   // Support ?deck=hp für iframe-Einbettung
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const deckParam = params.get("deck");
     if (deckParam) {
-      const found = SIGNAL_DECKS.find(
-        (d) => d.id.toLowerCase() === deckParam.toLowerCase()
-      );
+      if (deckParam.toLowerCase() === "alle") { setStudyDeck(ALL_DECK); return; }
+      const found = SIGNAL_DECKS.find((d) => d.id.toLowerCase() === deckParam.toLowerCase());
       if (found) setStudyDeck(found);
     }
   }, []);
@@ -49,20 +57,40 @@ export default function Home() {
         Ril 301 INB 2026 · Eisenbahnsignale lernen · Wähle ein Deck zum Üben
       </p>
 
-      {/* Gesamtfortschritt */}
-      {totalStudied > 0 && (
-        <div className="card mb-6 py-3 px-4 flex items-center justify-between gap-4 flex-wrap">
-          <div className="text-sm" style={{ color: "var(--text)" }}>
-            <span className="font-semibold">{totalStudied}</span>
-            <span className="muted"> / {totalCards} Karten schon gelernt</span>
-          </div>
+      {/* Gesamtfortschritt + Streak */}
+      <div className="card mb-4 py-3 px-4 flex items-center justify-between gap-4 flex-wrap">
+        <div className="text-sm" style={{ color: "var(--text)" }}>
+          {totalStudied > 0 ? (
+            <>
+              <span className="font-semibold">{totalStudied}</span>
+              <span className="muted"> / {totalCards} Karten schon gelernt</span>
+            </>
+          ) : (
+            <span className="muted">Noch keine Karten gelernt — leg los! 🚦</span>
+          )}
+        </div>
+        <div className="flex items-center gap-3">
           {totalDue > 0 && (
             <div className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
-              {totalDue} heute fällig 🔔
+              {totalDue} fällig 🔔
+            </div>
+          )}
+          {streak.currentStreak > 0 && (
+            <div className="text-sm font-semibold text-orange-400" title={`Rekord: ${streak.longestStreak} Tage`}>
+              🔥 {streak.currentStreak} Tag{streak.currentStreak !== 1 ? "e" : ""}
             </div>
           )}
         </div>
-      )}
+      </div>
+
+      {/* Alle Decks Button */}
+      <button
+        className="btn btn-primary w-full mb-6 py-3 text-base font-semibold"
+        type="button"
+        onClick={() => setStudyDeck(ALL_DECK)}
+      >
+        🃏 Alle {totalCards} Signale gemischt üben
+      </button>
 
       <ul className="space-y-4">
         {SIGNAL_DECKS.map((deck) => {
@@ -101,7 +129,6 @@ export default function Home() {
                   {s && s.due > 0 ? `▶ Lernen (${s.due})` : "▶ Lernen"}
                 </button>
               </div>
-              {/* Fortschrittsbalken */}
               {s && s.studied > 0 && (
                 <div className="w-full rounded-full h-1.5 overflow-hidden" style={{ background: "var(--border)" }}>
                   <div

@@ -3,7 +3,7 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 
 const FEEDBACK_URL =
-  "https://docs.google.com/forms/d/e/FEEDBACK_FORM_ID/viewform";
+  "https://forms.cloud.microsoft/e/UwAyA3i99m";
 
 export const metadata: Metadata = {
   title: "Signalbuch – Eisenbahnsignale lernen",

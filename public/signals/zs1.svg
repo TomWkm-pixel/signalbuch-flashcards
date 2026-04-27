@@ -1,0 +1,17 @@
+<!-- Zs 1 – Ersatzsignal: weißes blinkendes Licht -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" fill="none">
+  <rect x="47" y="110" width="6" height="28" fill="#555"/>
+  <rect x="10" y="10" width="80" height="100" rx="8" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  <circle cx="50" cy="60" r="26" fill="#222"/>
+  <circle cx="50" cy="60" r="20" fill="#e8e8e8" opacity="0.9"/>
+  <circle cx="50" cy="60" r="20" fill="url(#zs1w)" opacity="0.7"/>
+  <circle cx="43" cy="53" r="6" fill="white" opacity="0.3"/>
+  <!-- Blink-Anzeige -->
+  <text x="50" y="95" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#aaa">blinkend</text>
+  <defs>
+    <radialGradient id="zs1w" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#aaaaaa"/>
+    </radialGradient>
+  </defs>
+</svg>

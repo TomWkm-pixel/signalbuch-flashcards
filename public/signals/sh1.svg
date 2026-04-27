@@ -1,0 +1,10 @@
+<!-- Sh 1 – Rangierfahrt erlaubt: weiße Scheibe mit waagerechtem weißem Balken -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" fill="none">
+  <rect x="57" y="56" width="6" height="22" fill="#555"/>
+  <!-- Scheibe Hintergrund -->
+  <rect x="8" y="10" width="104" height="46" rx="6" fill="#333"/>
+  <!-- Weißer Balken -->
+  <rect x="8" y="26" width="104" height="14" fill="white"/>
+  <!-- Rand -->
+  <rect x="8" y="10" width="104" height="46" rx="6" fill="none" stroke="#888" stroke-width="2"/>
+</svg>

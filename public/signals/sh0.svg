@@ -1,0 +1,9 @@
+<!-- Sh 0 – Fahrverbot: rot-weiß-rote waagerechte Scheibe -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" fill="none">
+  <rect x="57" y="56" width="6" height="22" fill="#555"/>
+  <!-- Scheibe -->
+  <rect x="8" y="10" width="104" height="46" rx="6" fill="#cc0000"/>
+  <rect x="8" y="26" width="104" height="14" fill="white"/>
+  <!-- Rand -->
+  <rect x="8" y="10" width="104" height="46" rx="6" fill="none" stroke="#888" stroke-width="2"/>
+</svg>

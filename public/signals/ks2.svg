@@ -1,0 +1,25 @@
+<!-- Ks 2 – Langsamfahrt erwarten: grünes Licht + gelber Lichtstreifen -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 150" fill="none">
+  <rect x="47" y="115" width="6" height="33" fill="#555"/>
+  <circle cx="50" cy="60" r="48" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  <!-- Grünes Licht -->
+  <circle cx="50" cy="48" r="18" fill="#222"/>
+  <circle cx="50" cy="48" r="13" fill="#00aa44" opacity="0.9"/>
+  <circle cx="50" cy="48" r="13" fill="url(#ks2g)" opacity="0.7"/>
+  <circle cx="44" cy="42" r="4" fill="white" opacity="0.15"/>
+  <!-- Gelber Lichtstreifen (Ankündigung Langsamfahrt) -->
+  <rect x="26" y="68" width="48" height="12" rx="6" fill="#222"/>
+  <rect x="28" y="70" width="44" height="8" rx="4" fill="#ddaa00" opacity="0.9"/>
+  <rect x="28" y="70" width="44" height="8" rx="4" fill="url(#ks2y)" opacity="0.7"/>
+  <text x="50" y="18" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">Ks</text>
+  <defs>
+    <radialGradient id="ks2g" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#44ff88"/>
+      <stop offset="100%" stop-color="#007733"/>
+    </radialGradient>
+    <linearGradient id="ks2y" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffee44"/>
+      <stop offset="100%" stop-color="#aa7700"/>
+    </linearGradient>
+  </defs>
+</svg>

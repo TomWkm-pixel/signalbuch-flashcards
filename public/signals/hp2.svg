@@ -1,0 +1,25 @@
+<!-- Hp 2 – Langsamfahrt: ein grünes Licht oben + ein gelbes Licht unten -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" fill="none">
+  <rect x="47" y="130" width="6" height="28" fill="#555"/>
+  <rect x="10" y="10" width="80" height="120" rx="8" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  <!-- Grünes Licht oben -->
+  <circle cx="50" cy="48" r="22" fill="#222"/>
+  <circle cx="50" cy="48" r="17" fill="#00aa44" opacity="0.9"/>
+  <circle cx="50" cy="48" r="17" fill="url(#greenGlow)" opacity="0.7"/>
+  <circle cx="43" cy="41" r="5" fill="white" opacity="0.15"/>
+  <!-- Gelbes Licht unten -->
+  <circle cx="50" cy="98" r="22" fill="#222"/>
+  <circle cx="50" cy="98" r="17" fill="#ddaa00" opacity="0.9"/>
+  <circle cx="50" cy="98" r="17" fill="url(#yellowGlow)" opacity="0.7"/>
+  <circle cx="43" cy="91" r="5" fill="white" opacity="0.15"/>
+  <defs>
+    <radialGradient id="greenGlow" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#44ff88"/>
+      <stop offset="100%" stop-color="#007733"/>
+    </radialGradient>
+    <radialGradient id="yellowGlow" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#ffee44"/>
+      <stop offset="100%" stop-color="#aa7700"/>
+    </radialGradient>
+  </defs>
+</svg>

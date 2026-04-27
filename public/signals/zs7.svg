@@ -1,0 +1,17 @@
+<!-- Zs 7 – Vorsicht: gelbes X-Lichtzeichen -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" fill="none">
+  <rect x="47" y="110" width="6" height="28" fill="#555"/>
+  <rect x="10" y="10" width="80" height="100" rx="8" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  <!-- X aus vier gelben Lichtern -->
+  <circle cx="30" cy="40" r="13" fill="#222"/>
+  <circle cx="30" cy="40" r="9" fill="#ddaa00" opacity="0.9"/>
+  <circle cx="70" cy="40" r="13" fill="#222"/>
+  <circle cx="70" cy="40" r="9" fill="#ddaa00" opacity="0.9"/>
+  <circle cx="30" cy="80" r="13" fill="#222"/>
+  <circle cx="30" cy="80" r="9" fill="#ddaa00" opacity="0.9"/>
+  <circle cx="70" cy="80" r="13" fill="#222"/>
+  <circle cx="70" cy="80" r="9" fill="#ddaa00" opacity="0.9"/>
+  <!-- X-Linien -->
+  <line x1="30" y1="40" x2="70" y2="80" stroke="#ddaa00" stroke-width="3" opacity="0.4"/>
+  <line x1="70" y1="40" x2="30" y2="80" stroke="#ddaa00" stroke-width="3" opacity="0.4"/>
+</svg>

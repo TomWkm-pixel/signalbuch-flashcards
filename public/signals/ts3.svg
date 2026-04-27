@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Ts 3: Abfahrtauftrag – weißes Licht -->
+  <rect width="120" height="120" fill="#1a1a2e" rx="6"/>
+  <rect x="38" y="12" width="44" height="96" fill="#222" rx="8" stroke="#444" stroke-width="2"/>
+  <!-- Top light off -->
+  <circle cx="60" cy="38" r="12" fill="#222" stroke="#444" stroke-width="1.5"/>
+  <!-- White middle light active -->
+  <circle cx="60" cy="66" r="16" fill="white" opacity="0.15"/>
+  <circle cx="60" cy="66" r="12" fill="white"/>
+  <!-- Bottom light off -->
+  <circle cx="60" cy="94" r="12" fill="#222" stroke="#444" stroke-width="1.5"/>
+</svg>

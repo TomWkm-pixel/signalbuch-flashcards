@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Lf 5: Anfang einer ständigen Langsamfahrstelle – gelbe Scheibe mit Streifen + Rahmen -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <circle cx="60" cy="56" r="44" fill="#f0c000" stroke="#111" stroke-width="3"/>
+  <clipPath id="lf5c"><circle cx="60" cy="56" r="44"/></clipPath>
+  <!-- Zwei Schrägstreifen (ständig = breiter als Lf 1) -->
+  <g clip-path="url(#lf5c)" stroke="#111" stroke-width="18" stroke-linecap="square">
+    <line x1="-20" y1="12" x2="140" y2="100"/>
+    <line x1="-20" y1="-16" x2="140" y2="72"/>
+  </g>
+  <circle cx="60" cy="56" r="44" fill="none" stroke="#111" stroke-width="3"/>
+  <!-- Doppelter Außenring für "ständig" -->
+  <circle cx="60" cy="56" r="38" fill="none" stroke="#111" stroke-width="2"/>
+  <rect x="57" y="100" width="6" height="16" fill="#888" rx="1"/>
+</svg>

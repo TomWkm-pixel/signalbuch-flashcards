@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Ts 2: Abfahrtbereitschaft – grüne Lampe / grünes Licht -->
+  <rect width="120" height="120" fill="#1a1a2e" rx="6"/>
+  <rect x="38" y="12" width="44" height="96" fill="#222" rx="8" stroke="#444" stroke-width="2"/>
+  <!-- Green light active -->
+  <circle cx="60" cy="38" r="16" fill="#00cc44" opacity="0.15"/>
+  <circle cx="60" cy="38" r="12" fill="#00cc44"/>
+  <!-- Middle light off -->
+  <circle cx="60" cy="66" r="12" fill="#222" stroke="#444" stroke-width="1.5"/>
+  <!-- Bottom light off -->
+  <circle cx="60" cy="94" r="12" fill="#222" stroke="#444" stroke-width="1.5"/>
+</svg>

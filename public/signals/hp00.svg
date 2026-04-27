@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Hp 00: Kennlicht – einzelnes weißes Licht (mondweiß) -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <!-- Mast -->
+  <rect x="57" y="70" width="6" height="46" fill="#555" rx="1"/>
+  <!-- Signalschirm -->
+  <rect x="30" y="18" width="60" height="56" fill="#222" stroke="#444" stroke-width="1.5" rx="4"/>
+  <!-- Einzelnes weißes Licht -->
+  <circle cx="60" cy="46" r="14" fill="white" opacity="0.95"/>
+  <circle cx="60" cy="46" r="10" fill="white"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Zs 8: Gefahrsignal – rotes blinkendes X auf dunklem Hintergrund -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <line x1="22" y1="22" x2="98" y2="98" stroke="#ff2200" stroke-width="16" stroke-linecap="round"/>
+  <line x1="98" y1="22" x2="22" y2="98" stroke="#ff2200" stroke-width="16" stroke-linecap="round"/>
+  <!-- Glühpunkte an den Enden -->
+  <circle cx="22" cy="22" r="8" fill="#ff4400" opacity="0.8"/>
+  <circle cx="98" cy="98" r="8" fill="#ff4400" opacity="0.8"/>
+  <circle cx="98" cy="22" r="8" fill="#ff4400" opacity="0.8"/>
+  <circle cx="22" cy="98" r="8" fill="#ff4400" opacity="0.8"/>
+</svg>

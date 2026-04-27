@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Ts 1: Türen schließen – weiße Tafel mit nach innen zeigenden Pfeilen -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <rect x="10" y="18" width="100" height="78" fill="white" stroke="#111" stroke-width="3" rx="3"/>
+  <!-- Zwei Pfeile die aufeinander zuzeigen (Türen schließen) -->
+  <polygon points="18,57 38,40 38,50 56,50 56,44 64,57 56,70 56,64 38,64 38,74" fill="#111"/>
+  <polygon points="102,57 82,40 82,50 64,50 64,44 56,57 64,70 64,64 82,64 82,74" fill="#111"/>
+  <rect x="57" y="96" width="6" height="18" fill="#888" rx="1"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Zs 9: Falschfahrtauftrag – weißer Pfeil nach links auf dunklem Hintergrund -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <!-- Pfeil nach links -->
+  <polygon points="18,60 54,28 54,44 102,44 102,76 54,76 54,92" fill="white"/>
+</svg>

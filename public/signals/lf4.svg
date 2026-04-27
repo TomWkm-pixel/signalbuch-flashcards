@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Lf 4: Ende der Vorsignalung für Langsamfahrstelle – gelbe Scheibe mit Diagonalstrich -->
+  <rect width="120" height="120" fill="#e8e8e8" rx="6"/>
+  <circle cx="60" cy="56" r="44" fill="#f0c000" stroke="#111" stroke-width="3"/>
+  <clipPath id="lf4c"><circle cx="60" cy="56" r="44"/></clipPath>
+  <line x1="16" y1="100" x2="104" y2="12" stroke="#111" stroke-width="10" stroke-linecap="round" clip-path="url(#lf4c)"/>
+  <rect x="57" y="100" width="6" height="16" fill="#888" rx="1"/>
+</svg>

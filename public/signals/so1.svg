@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- So 1: Schneepflugschild – weißes Dreieck mit schwarzem Rand -->
+  <rect width="120" height="120" fill="#dce8f0" rx="6"/>
+  <polygon points="60,12 108,100 12,100" fill="white" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Center snowflake symbol -->
+  <line x1="60" y1="42" x2="60" y2="86" stroke="#111" stroke-width="3"/>
+  <line x1="38" y1="64" x2="82" y2="64" stroke="#111" stroke-width="3"/>
+  <line x1="44" y1="48" x2="76" y2="80" stroke="#111" stroke-width="3"/>
+  <line x1="76" y1="48" x2="44" y2="80" stroke="#111" stroke-width="3"/>
+</svg>

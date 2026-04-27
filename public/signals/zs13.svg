@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Zs 13: Bremsprobezeichen – leuchtendes grünes "B" auf dunklem Hintergrund -->
+  <rect width="120" height="120" fill="#0d0d0d" rx="6"/>
+  <text x="60" y="78" font-family="Arial Black,Arial,sans-serif" font-size="72" font-weight="900" fill="#22cc44" text-anchor="middle">B</text>
+</svg>

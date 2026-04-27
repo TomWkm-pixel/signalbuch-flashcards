@@ -123,7 +123,8 @@ export type DeckStats = {
   total: number;       // Gesamtzahl der Karten im Deck
   studied: number;     // Schon mindestens einmal gelernt
   due: number;         // Heute fällig (inkl. neue Karten)
-  mastered: number;    // Interval >= 21 Tage (gut eingeprägt)
+  known: number;       // Letzte Bewertung war "gut" oder "einfach"
+  retry: number;       // Letzte Bewertung war "nochmal" oder "schwer"
   pct: number;         // Fortschritt in % (studied/total)
 };
 
@@ -132,16 +133,21 @@ export function getDeckStats(cardIds: string[], store: ProgressStore): DeckStats
   const total = cardIds.length;
   let studied = 0;
   let due = 0;
-  let mastered = 0;
+  let known = 0;
+  let retry = 0;
 
   for (const id of cardIds) {
     const p = store[id];
     if (p) {
       studied++;
-      if (p.interval >= 21) mastered++;
+      if (p.lastGrade === "gut" || p.lastGrade === "einfach") {
+        known++;
+      } else {
+        retry++;
+      }
       if (isDue(p)) due++;
     } else {
-      // Neue (nie gelernte) Karten sind sofort fällig
+      // Neue Karten sind sofort fällig
       due++;
     }
   }
@@ -150,7 +156,8 @@ export function getDeckStats(cardIds: string[], store: ProgressStore): DeckStats
     total,
     studied,
     due,
-    mastered,
+    known,
+    retry,
     pct: total > 0 ? Math.round((studied / total) * 100) : 0,
   };
 }

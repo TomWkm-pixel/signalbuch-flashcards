@@ -77,7 +77,12 @@ export default function Home() {
                     <span className="muted text-xs">{deck.cards.length} Karten</span>
                     {s && s.studied > 0 && (
                       <>
-                        <span className="text-xs text-emerald-400">{s.mastered} gemeistert</span>
+                        {s.known > 0 && (
+                          <span className="text-xs text-emerald-400">✓ {s.known} gewusst</span>
+                        )}
+                        {s.retry > 0 && (
+                          <span className="text-xs text-orange-400">↩ {s.retry} nochmal</span>
+                        )}
                         {s.due > 0 && (
                           <span className="text-xs font-semibold" style={{ color: "var(--accent)" }}>
                             {s.due} fällig 🔔

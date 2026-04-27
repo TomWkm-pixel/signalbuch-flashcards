@@ -6,6 +6,8 @@ import { SIGNAL_DECKS } from "@/lib/data/signals";
 import StudySession from "@/components/StudySession";
 import { loadProgress, getDeckStats, loadStreak, type DeckStats, type StreakData } from "@/lib/sm2";
 
+const HELP_KEY = "signalbuch_help_seen";
+
 // Virtuelles "Alle Decks"-Deck — alle Karten gemischt
 const ALL_DECK: SignalDeck = {
   id: "alle",
@@ -13,6 +15,105 @@ const ALL_DECK: SignalDeck = {
   description: "Alle 58 Signalkarten aus allen Decks gemischt",
   cards: SIGNAL_DECKS.flatMap((d) => d.cards),
 };
+
+function HelpSection() {
+  const [open, setOpen] = useState(false);
+
+  // Beim ersten Besuch automatisch aufklappen
+  useEffect(() => {
+    const seen = localStorage.getItem(HELP_KEY);
+    if (!seen) setOpen(true);
+  }, []);
+
+  const close = () => {
+    setOpen(false);
+    localStorage.setItem(HELP_KEY, "1");
+  };
+
+  return (
+    <div className="card mb-4" style={{ borderColor: open ? "var(--accent)" : "var(--border)" }}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between gap-2 text-left"
+        style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+      >
+        <span className="font-semibold text-sm" style={{ color: "var(--text)" }}>
+          ❓ Wie funktioniert die App?
+        </span>
+        <span className="muted text-xs">{open ? "▲ Schließen" : "▼ Anzeigen"}</span>
+      </button>
+
+      {open && (
+        <div className="mt-4 space-y-4 text-sm" style={{ color: "var(--text)" }}>
+
+          <div>
+            <p className="font-semibold mb-1">🃏 Lernkarten</p>
+            <p className="muted">
+              Wähle ein Deck aus — zum Beispiel „Hauptsignale". Du siehst das Signalbild.
+              Drücke auf die Karte (oder die <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>Leertaste</kbd>),
+              um die Bedeutung aufzudecken. Dann bewertest du, wie gut du es wusstest.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold mb-1">📊 Bewertung</p>
+            <ul className="muted space-y-1 ml-2">
+              <li><span className="text-red-400 font-semibold">🔁 Nochmal</span> — Nicht gewusst. Karte kommt morgen wieder.</li>
+              <li><span className="text-orange-400 font-semibold">😓 Schwer</span> — Mit Mühe erinnert. Kommt bald wieder.</li>
+              <li><span className="text-emerald-400 font-semibold">✓ Gut</span> — Richtig, aber nicht sofort. Kommt in einigen Tagen.</li>
+              <li><span style={{ color: "var(--accent)" }} className="font-semibold">⚡ Einfach</span> — Sofort gewusst! Kommt erst in Wochen wieder.</li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-semibold mb-1">🧠 Spaced Repetition</p>
+            <p className="muted">
+              Die App merkt sich, welche Signale du schon gut kennst und welche nicht.
+              Schwierige Karten siehst du öfter, einfache seltener. So lernst du effizienter —
+              genau wie mit Karteikärtchen, nur viel smarter.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold mb-1">🔥 Streak</p>
+            <p className="muted">
+              Lernst du jeden Tag, wächst dein Streak. Die Zahl oben zeigt, wie viele Tage
+              du in Folge gelernt hast. Versuche, deinen Rekord zu brechen!
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold mb-1">⌨️ Tastenkürzel</p>
+            <p className="muted">
+              <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>Leertaste</kbd> Karte umdrehen &nbsp;·&nbsp;
+              <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>1</kbd> Nochmal &nbsp;·&nbsp;
+              <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>2</kbd> Schwer &nbsp;·&nbsp;
+              <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>3</kbd> Gut &nbsp;·&nbsp;
+              <kbd className="px-1 rounded text-xs" style={{ border: "1px solid var(--border)" }}>4</kbd> Einfach
+            </p>
+          </div>
+
+          <div>
+            <p className="font-semibold mb-1">📱 App installieren</p>
+            <p className="muted">
+              Du kannst die App auf deinem Handy installieren und auch offline nutzen.
+              Auf iPhone: „Teilen" → „Zum Home-Bildschirm". Auf Android: im Browser-Menü „App installieren".
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={close}
+            className="btn btn-primary text-xs py-1.5 px-4"
+          >
+            Verstanden, loslegen! 🚦
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const [studyDeck, setStudyDeck] = useState<SignalDeck | null>(null);
@@ -56,6 +157,8 @@ export default function Home() {
       <p className="muted text-sm mb-4">
         Ril 301 INB 2026 · Eisenbahnsignale lernen · Wähle ein Deck zum Üben
       </p>
+
+      <HelpSection />
 
       {/* Gesamtfortschritt + Streak */}
       <div className="card mb-4 py-3 px-4 flex items-center justify-between gap-4 flex-wrap">

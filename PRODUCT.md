@@ -160,7 +160,7 @@ type SignalCard = {
 
 - [x] 3.1 Deck-Übersichtsseite mit Kartenanzahl je Deck
 - [x] 3.2 Kachelansicht: Deck-Name, Anzahl Karten, Beschreibung
-- [ ] 3.3 "Alle Decks" – Modus: Karten quer über alle Gruppen gemischt
+- [x] 3.3 "Alle Decks" – Modus: Karten quer über alle Gruppen gemischt (`?deck=alle`)
 - [x] 3.4 URL-Parameter: `?deck=hp` für Direktstart (für Einbettung)
 
 ---
@@ -179,10 +179,10 @@ type SignalCard = {
 ### WP 5 — Fortschritt & Wiederholung (SM-2)
 **Ziel:** Karten erscheinen zum richtigen Zeitpunkt — wie Anki.
 
-- [ ] 5.1 SM-2-Algorithmus implementieren (Intervall, Easiness Factor)
-- [ ] 5.2 Fortschritt in `localStorage` speichern (kein Backend nötig für MVP)
-- [ ] 5.3 "Heute fällige Karten" — Badge im Deck-Overview
-- [ ] 5.4 Streak-Anzeige: "5 Tage in Folge gelernt 🔥"
+- [x] 5.1 SM-2-Algorithmus implementieren (`src/lib/sm2.ts` — Intervall, Easiness Factor)
+- [x] 5.2 Fortschritt in `localStorage` speichern (`signalbuch_sm2_progress`)
+- [x] 5.3 "Heute fällige Karten" — Badge im Deck-Overview (🔔 X fällig)
+- [x] 5.4 Streak-Anzeige: "5 Tage in Folge gelernt 🔥" (`signalbuch_streak`)
 
 ---
 
@@ -230,7 +230,7 @@ type SignalCard = {
 | Animiertes Kartenblättern | **Could** |
 | Nutzeraccounts | **Could** |
 | Ausbilder-Dashboard | **Won't** (v2) |
-| PWA/Offline | **Won't** (v2) |
+| PWA/Offline | ✅ implementiert |
 
 ---
 
@@ -246,7 +246,7 @@ type SignalCard = {
 
 ---
 
-## 11. Nächste Schritte (Sprint 6)
+## 11. Sprint-Historie & Nächste Schritte
 
 **Abgeschlossen bis April 2026:**
 - ✅ Sprint 1: 18 Signale, 7 Decks, 18 SVGs
@@ -254,14 +254,15 @@ type SignalCard = {
 - ✅ Sprint 3: GitHub-Repo + Vercel-Deployment, iframe-Einbettung live
 - ✅ Sprint 4: Erweiterung auf 37 Signale, 10 Decks (Lf, El, Bü ergänzt)
 - ✅ Sprint 5: Vollständige Signalabdeckung — 58 Karten in 13 Decks (Ts, So, Pf ergänzt)
+- ✅ Sprint 6: SM-2 Spaced Repetition, localStorage-Persistenz, Dark Mode, PWA (Manifest + Service Worker + Icons), Streak-Anzeige, Alle-Decks-Modus, Feedback-Button (Microsoft Forms), In-App-Hilfe/Onboarding
 
-**Nächste Prioritäten:**
-1. **SM-2 Spaced Repetition** — Wiederholungsintervalle berechnen, fällige Karten anzeigen
-2. **localStorage-Persistenz** — Lernstand zwischen Sessions speichern
-3. **Dark-Mode-Toggle** — Nutzer kann manuell umschalten (CSS-Variablen bereits vorbereitet)
-4. **PWA-Manifest** — Offline-Nutzung, App-Icon, "Zum Homescreen hinzufügen"
-5. **Fachliche Korrekturlesung** — Alle 58 Karten gegen Ril 301 INB 2026 abgleichen
+**Sprint 7 — Nächste Prioritäten:**
+1. **Fachliche Korrekturlesung** — Alle 58 Karten gegen Ril 301 INB 2026 abgleichen
+2. **Multiple-Choice-Modus** — 4 Bilder, welches bedeutet was?
+3. **Barrierefreiheit** — aria-labels, WCAG-Kontraste, Tastaturnavigation komplett
+4. **Analytics** — datenschutzkonform (Plausible o.ä.) um Nutzungsverhalten zu verstehen
+5. **Umgekehrter Modus** — Bedeutung vorne, Signalbild/Name hinten
 
 ---
 
-*Zuletzt aktualisiert: April 2026*
+*Zuletzt aktualisiert: April 2026 (Sprint 6)*

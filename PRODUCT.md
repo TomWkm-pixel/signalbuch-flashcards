@@ -4,6 +4,8 @@
 > **Zielgruppe:** Eisenbahner in Ausbildung, Triebfahrzeugführer, Fahrdienstleiter, Selbstlernende  
 > **Quelle:** Ril 301 INB 2026 (DB Richtlinie 301 – Signalbuch, 190+ Seiten, Text + visuelle Elemente)
 
+> **Dokumentationsstand:** 5. Oktober 2026, abgeglichen mit Repository-Commit `306b094`. Implementierte Funktionen sind unten vom weiteren Zielbild getrennt. Maßgeblich für den aktuellen Umfang sind `src/app/page.tsx`, `src/lib/data/signals.ts`, die eingebundenen Komponenten und `src/lib/sm2.ts`; Deployment-Konfiguration: `next.config.js` und `package.json`.
+
 ---
 
 ## 1. Vision
@@ -11,9 +13,9 @@
 Lernende sollen die deutschen Eisenbahnsignale nach Ril 301 schnell, sicher und mit Spaß erlernen — wann immer und wo immer sie wollen. Die App wandelt das dichte Regelwerk in interaktive Lernkarten um und macht repetitives Lernen motivierend statt mühsam.
 
 **Kern-Versprechen:**
-- Jedes Signal als Lernkarte: Bild vorne, Bedeutung + Regelreferenz hinten
+- Signale als Lernkarten: Bild vorne, Bedeutung + Regelreferenz hinten (aktueller Umfang: 58 Karten; fachliche Prüfung offen)
 - Thematisch geordnet (Hauptsignale, Vorsignale, Langsamfahrsignale, …)
-- Einbettbar in eine bestehende Website (iframe / Web-Component)
+- Einbettbar in eine bestehende Website (iframe; Web-Component als spätere Erweiterung)
 - Vollständig auf Deutsch
 
 ---
@@ -29,46 +31,54 @@ Lernende sollen die deutschen Eisenbahnsignale nach Ril 301 schnell, sicher und 
 
 ---
 
-## 3. Kernfunktionen (MVP)
+## 3. Aktuell implementierte Funktionen
 
 ### 3.1 Lernkarten-Decks
-- Decks nach Signalgruppen (Hp, Vr, Lf, Ra, So, Zs, El, …)
+- 58 fest vorgegebene Karten in 13 Decks nach Signalgruppen (Hp, Vr, Lf, Ra, So, Zs, El, …), definiert in `src/lib/data/signals.ts`
+- Keine Oberfläche für eigene Decks/Karten in der aktiven App: Die generische Komponente `DeckList.tsx` und `sampleData.ts` sind nicht in die Startseite eingebunden.
 - Jede Karte:
   - **Vorderseite:** Signalbild (SVG oder Bild-Asset) + Signalname
-  - **Rückseite:** Bedeutung (Wortlaut Ril 301) + Signalnummer + ggf. Regelreferenz
-- Mehrere Antwortmodi:
-  - Klassisches Umblättern (Flip)
-  - Multiple-Choice (4 Signale — welches bedeutet was?)
+  - **Rückseite:** Bedeutung + Signalname + Regelreferenz + ggf. Merkhilfe; fachlicher Abgleich mit Ril 301 noch offen
+- Klassisches Umblättern mit 3D-Flip-Animation; Multiple Choice ist noch geplant.
 
 ### 3.2 Lernmodus
-- Karten der Reihe nach durcharbeiten
-- Selbstbewertung: **Nochmal / Schwer / Gut / Einfach** (Basis für SM-2-Scheduling später)
+- Neue und nach SM-2 fällige Karten werden gemischt abgefragt. Wenn nichts fällig ist, wird das gesamte gewählte Deck zum weiteren Üben angeboten.
+- Selbstbewertung: **Nochmal / Schwer / Gut / Einfach** aktualisiert bereits den SM-2-Lernstand.
 - Fortschrittsanzeige je Session
+- Leertaste zum Umblättern, Tasten 1–4 zum Bewerten der aufgedeckten Karte
+- „Alle Signale“ kombiniert die Karten aller Decks mit derselben Fälligkeitsauswahl.
 
 ### 3.3 Abschlusszusammenfassung
-- Anzahl richtig / schwierig / nochmal
-- Motivierendes Feedback ("Alle Hauptsignale gemeistert! 🚦")
+- Verteilung der vier Selbstbewertungen und Anteil „gewusst“ (Gut + Einfach)
+- Erneutes Üben derselben Session oder Rückkehr zur Übersicht
 
 ### 3.4 Einbettung in bestehende Website
 - Die App wird als eigenständige Next.js-App gebaut
-- Einbindung via `<iframe>` **oder** als Web-Component (Custom Element)
-- Konfigurierbarer Startdeck-Parameter: `?deck=hauptsignale`
+- Einbindung via `<iframe>`; Anleitung und Deck-IDs in [README.md](README.md#einbettung)
+- Startdeck-Parameter: `?deck=hp` (Hauptsignale) oder `?deck=alle`; ohne gültige ID erscheint die Übersicht.
+- Web-Component, spezielles Embed-Layout und `postMessage`-Kommunikation sind noch offen. Ein statischer Export ist keine Voraussetzung für die iframe-Einbettung.
+
+### 3.5 Lernstand, Darstellung und PWA
+- SM-2-Fortschritt und Fälligkeiten je Deck in `localStorage` (`signalbuch_sm2_progress`), ohne Account oder geräteübergreifende Synchronisation
+- Streaks nach abgeschlossenen Sessions (`signalbuch_streak`)
+- Hell-/Dunkelmodus mit gespeicherter Auswahl und Systempräferenz als Voreinstellung
+- In-App-Hilfe und Feedback-Link zu Microsoft Forms
+- PWA-Manifest, Icons, Installationshinweise und Service Worker mit Asset-Caching vorhanden. Vollständiges Offline-Starten ist noch nicht abgesichert: `public/sw.js` speichert keine HTML-Seiten im Cache; Signalbilder und Next.js-Assets werden beim Abruf gecached.
 
 ---
 
-## 4. Erweiterte Funktionen (Post-MVP)
+## 4. Geplante Erweiterungen (noch nicht implementiert)
 
 | Feature | Nutzen |
 |---|---|
-| **SM-2 Spaced Repetition** | Karten erscheinen zum optimalen Wiederholungszeitpunkt |
-| **Fortschritts-Tracking** | Lernstand je Signal/Deck sichtbar, gespeichert in localStorage |
+| **Multiple Choice** | Signalbilder anhand vorgegebener Antworten erkennen |
+| **Umgekehrter Modus** | Bedeutung vorne, Signalname/Bild hinten |
 | **Quiz-Modus** | 20-Fragen-Test mit Zeitlimit, wie eine echte Prüfungsvorbereitung |
 | **Bilderkennung-Karten** | Signalbild ohne Namen anzeigen → Nutzer tippt den Namen ein |
 | **Nutzer-Accounts / Haushalt** | Zwei Lernende teilen Decks, sehen gegenseitigen Fortschritt |
 | **Ausbilder-Dashboard** | Überblick: Welche Signale bereiten der Gruppe Schwierigkeiten? |
-| **Dark Mode** | Bereits vorbereitet via CSS-Variablen |
-| **Offline-Support (PWA)** | Lernen im Zug ohne Internet |
-| **Zufallsmodus** | Gemischte Karten quer über alle Decks |
+| **Vollständiger Offline-Start** | HTML-/Asset-Verfügbarkeit nach Installation und bei Neustart ohne Netz sicherstellen |
+| **Web-Component / Host-Integration** | Wrapper, transparentes Layout und Theme-Sync ergänzen |
 
 ---
 
@@ -92,7 +102,7 @@ Die Lernkarten-Decks orientieren sich an den offiziellen Kapiteln der Ril 301:
 | **So** | Sonstige Signale | So 1, So 3, So 6 | ✅ 3 Karten |
 | **Pf** | Pfeifzeichen | Pf 1–7 | ✅ 7 Karten |
 
-**Gesamtstand: 58 Karten in 13 Decks — vollständige Ril 301-Abdeckung für Lernzwecke erreicht (Stand: April 2026)**
+**Gesamtstand: 58 Karten in 13 Decks mit 58 SVGs.** Dies beschreibt den vorhandenen Datenbestand; eine vollständige Ril-301-Abdeckung und fachliche Freigabe sind damit nicht belegt (siehe WP 1.5 und WP 7.1).
 
 ---
 
@@ -100,24 +110,27 @@ Die Lernkarten-Decks orientieren sich an den offiziellen Kapiteln der Ril 301:
 
 | Schicht | Technologie | Begründung |
 |---|---|---|
-| Frontend | Next.js 14 (App Router) + TypeScript | Bereits aufgesetzt, SSR + statischer Export |
+| Frontend | Next.js 14.2.35 (App Router) + TypeScript | Regulärer Next.js-Build; statischer Export nicht konfiguriert |
 | Styling | Tailwind CSS + CSS-Variablen | Konsistent, theming-fähig |
 | Bilder/SVGs | Statische Assets in `public/signals/` | Signalbilder als SVG oder PNG |
-| Daten | JSON-Datei(en) in `src/lib/data/` | Kein Backend nötig für MVP |
+| Daten | TypeScript-Konstante `SIGNAL_DECKS` in `src/lib/data/signals.ts` | Vorgegebene Inhalte, kein Backend |
 | Persistenz (MVP) | `localStorage` | Fortschritt ohne Account speichern |
-| Persistenz (v2) | PostgreSQL + REST API | Für Accounts & Multiplayer |
+| Persistenz (v2, geplant) | PostgreSQL + REST API | Für Accounts & Multiplayer; nicht implementiert |
 | Einbettung | `<iframe>` + URL-Parameter | Einfachste, sicherste Einbettung |
-| Einbettung (v2) | Web Component / Custom Element | Tiefere Integration in Host-Website |
+| Einbettung (v2, geplant) | Web Component / Custom Element | Tiefere Integration in Host-Website; nicht implementiert |
+
+**Deployment-Status:** Vercel-Deployment ist in der Projekthistorie dokumentiert (WP 8.1). Der Code enthält jedoch nur `const nextConfig = {}` sowie die Skripte `next build` / `next start`. Ein Vercel-Deployment und ein statischer Export sind getrennte Sachverhalte. `output: "export"` fehlt; WP 6.1 bleibt offen. Für Next.js 14 erfolgt ein künftiger Export über diese Option und `next build`, nicht über den entfernten Befehl `next export` (siehe [Next.js-Dokumentation](https://nextjs.org/docs/14/app/building-your-application/deploying/static-exports)). Die aktuelle Erreichbarkeit und die Vercel-Projekteinstellungen lassen sich aus dem Repository allein nicht bestätigen.
 
 ---
 
 ## 7. Datenstuktur: Signalkarte
 
 ```typescript
-// src/lib/types.ts (erweitert)
+// src/lib/types.ts (aktueller SignalCard-Typ)
 type SignalCard = {
   id: string;           // z.B. "hp1"
   deck: string;         // z.B. "Hauptsignale"
+  deckId: string;       // z.B. "hp"
   signalName: string;   // z.B. "Hp 1"
   image: string;        // Pfad: "/signals/hp1.svg"
   meaning: string;      // "Fahrt" — der genaue Ril-301-Wortlaut
@@ -132,7 +145,7 @@ type SignalCard = {
 ## 8. Arbeitspakete (Work Packages)
 
 ### WP 1 — Inhalte aufbereiten (Grundlage für alles)
-**Ziel:** Alle Signale aus der Ril 301 INB 2026 als strukturierte JSON-Daten und Bildmaterial erfassen.
+**Ziel:** Signale aus der Ril 301 INB 2026 als strukturierte TypeScript-Daten und Bildmaterial erfassen; Vollständigkeit fachlich prüfen.
 
 - [x] 1.1 Alle Signalgruppen aus der PDF extrahieren und tabellarisch erfassen
 - [x] 1.2 Für jedes Signal: Name, Bedeutung (Ril-Wortlaut), Signalnummer, Regelreferenz
@@ -149,7 +162,7 @@ type SignalCard = {
 
 - [x] 2.1 `public/signals/`-Ordner angelegt, 58 SVGs hinzugefügt
 - [x] 2.2 Kartenkomponente (`FlashCard.tsx`) erweitert: Bild-Vorderseite + Text-Rückseite
-- [x] 2.3 Fallback-Darstellung wenn Bild fehlt (Platzhalter + Signalname)
+- [ ] 2.3 Fallback-Darstellung wenn Bild fehlt (Platzhalter + Signalname); aktuell nur `img` mit Alternativtext, kein Fehler-Fallback
 - [x] 2.4 Responsive Darstellung auf Smartphone und Desktop
 - [ ] 2.5 Dark-Mode-Kompatibilität der SVGs prüfen (ggf. `currentColor` nutzen)
 
@@ -189,8 +202,8 @@ type SignalCard = {
 ### WP 6 — Einbettung in bestehende Website
 **Ziel:** Die App nahtlos in die Host-Website integrieren.
 
-- [ ] 6.1 Next.js `next export` (statischer Build) konfigurieren
-- [ ] 6.2 `<iframe>`-Einbettungsanleitung erstellen
+- [ ] 6.1 Statischen Export mit `output: "export"` in `next.config.js` konfigurieren und `npm run build` / `out/` prüfen; aktuell nicht konfiguriert, unabhängig vom Vercel-Deployment in WP 8.1
+- [x] 6.2 `<iframe>`-Einbettungsanleitung in [README.md](README.md#einbettung) dokumentiert
 - [ ] 6.3 CSS-Anpassungen: transparenter Hintergrund, Host-Schrift übernehmen
 - [ ] 6.4 Kommunikation Host ↔ App via `postMessage` (optional, für Theme-Sync)
 - [ ] 6.5 Web-Component-Wrapper (optional, v2): `<signalbuch-app deck="hauptsignale">`
@@ -203,12 +216,13 @@ type SignalCard = {
 - [ ] 7.3 Tastaturnavigation vollständig bedienbar
 - [ ] 7.4 Farbkontraste WCAG AA bestanden (besonders Signalfarben)
 - [ ] 7.5 Test auf iOS Safari + Android Chrome
+- [ ] 7.6 Vollständigen Offline-Start absichern und prüfen (HTML wird vom aktuellen Service Worker nicht gecached)
 
 ---
 
 ### WP 8 — Deployment & Integration
-- [x] 8.1 Statischer Export + Vercel-Deployment konfiguriert (`signalbuch-flashcards.vercel.app`)
-- [x] 8.2 Einbindung in Host-Website via `<iframe>` mit `?deck=`-Parameter möglich
+- [x] 8.1 Vercel-Deployment laut Projekthistorie eingerichtet (`signalbuch-flashcards.vercel.app`); regulärer Next.js-Build, kein konfigurierter statischer Export (siehe WP 6.1)
+- [x] 8.2 Direktstart per `?deck=` für `<iframe>`-Einbettung implementiert; Hosting-/Host-Konfiguration muss Einbettung zulassen
 - [ ] 8.3 Custom Domain / Subdomain falls nötig
 - [ ] 8.4 Analytics (optional, datenschutzkonform, z.B. Plausible)
 
@@ -230,7 +244,7 @@ type SignalCard = {
 | Animiertes Kartenblättern | **Could** |
 | Nutzeraccounts | **Could** |
 | Ausbilder-Dashboard | **Won't** (v2) |
-| PWA/Offline | ✅ implementiert |
+| PWA/Offline | PWA-Bausteine implementiert; vollständiger Offline-Start offen (WP 7.6) |
 
 ---
 
@@ -242,18 +256,18 @@ type SignalCard = {
 | 2 | Dürfen Ril-301-Inhalte 1:1 verwendet werden? | Interne Nutzung / Lizenz klären | ✅ Für Lernzwecke freigegeben |
 | 3 | Einbettung: iframe vs. Web Component | iframe = einfach; WC = flexibler | ✅ iframe mit `?deck=` implementiert |
 | 4 | Fortschritt: nur lokal oder mit Account? | localStorage für MVP, Account später | ✅ entschieden |
-| 5 | Sprache der Code-Kommentare | Deutsch oder Englisch | ✅ Deutsch
+| 5 | Sprache der Code-Kommentare | Deutsch oder Englisch | ✅ Deutsch |
 
 ---
 
 ## 11. Sprint-Historie & Nächste Schritte
 
-**Abgeschlossen bis April 2026:**
+**Bisher dokumentierte Sprint-Historie bis April 2026** (kein Nachweis aktueller Deployment-Erreichbarkeit oder fachlicher Freigabe):
 - ✅ Sprint 1: 18 Signale, 7 Decks, 18 SVGs
 - ✅ Sprint 2: 3D-Flip-Animation, Keyboard-Shortcuts (Space/1–4), `?deck=`-URL-Parameter
 - ✅ Sprint 3: GitHub-Repo + Vercel-Deployment, iframe-Einbettung live
 - ✅ Sprint 4: Erweiterung auf 37 Signale, 10 Decks (Lf, El, Bü ergänzt)
-- ✅ Sprint 5: Vollständige Signalabdeckung — 58 Karten in 13 Decks (Ts, So, Pf ergänzt)
+- ✅ Sprint 5: Erweiterung auf 58 Karten in 13 Decks (Ts, So, Pf ergänzt)
 - ✅ Sprint 6: SM-2 Spaced Repetition, localStorage-Persistenz, Dark Mode, PWA (Manifest + Service Worker + Icons), Streak-Anzeige, Alle-Decks-Modus, Feedback-Button (Microsoft Forms), In-App-Hilfe/Onboarding
 
 **Sprint 7 — Nächste Prioritäten:**
@@ -265,4 +279,4 @@ type SignalCard = {
 
 ---
 
-*Zuletzt aktualisiert: April 2026 (Sprint 6)*
+*Zuletzt aktualisiert: 5. Oktober 2026 (Dokumentationsabgleich mit Repository-Stand `306b094`; keine funktionalen Änderungen)*
